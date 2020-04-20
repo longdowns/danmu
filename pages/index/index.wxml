@@ -1,0 +1,133 @@
+<canvas canvasId="myCanvas" style="background:#000;height:{{CH}}px;width:{{W}}px;"></canvas>
+<cover-view catchtap="showMode" class="controls" style="right:5px;">模式</cover-view>
+<cover-view catchtap="show" class="controls" style="left:5px;">
+    <block wx:if="{{show}}">完成</block>
+    <block wx:else>设置</block>
+</cover-view>
+<view class="tools tools_1" style="width:{{W}}px;height:120px;" wx:if="{{showMode}}">
+    <text catchtap="modeSelect" data-mode="1" style="background:#1296db;color:#ffffff;" wx:if="{{mode==1}}">弹幕模式</text>
+    <text catchtap="modeSelect" data-mode="1" wx:else>弹幕模式</text>
+    <text catchtap="modeSelect" data-mode="2" style="background:#1296db;color:#ffffff;" wx:if="{{mode==2}}">星星模式</text>
+    <text catchtap="modeSelect" data-mode="2" wx:else>酷炫模式</text>
+</view>
+<view class="tools tools_2" style="width:{{W}}px;height:250px;" wx:if="{{mode==1&&show&&!showMode}}">
+    <view class="tools-box">
+        <text>文字</text>
+        <input bindinput="inputText" style="width:{{W-120}}px;" value="{{Text.text}}"></input>
+        <view catchtap="clearText" class="box-button" hoverClass="box-button-hover">X</view>
+    </view>
+    <view class="tools-box" style="overflow:hidden;white-space:nowrap;">
+        <text>颜色</text>
+        <scroll-view scrollX style="width: {{W-90}}px;overflow:hidden;">
+            <view catchtap="colorSelect" class="box-button box-button-border" data-colormode="0" hoverClass="box-button-hover" style="background:rgb(255,255,255)" wx:if="{{Text.colorMode==0}}"></view>
+            <view catchtap="colorSelect" class="box-button" data-colormode="0" hoverClass="box-button-hover" style="background:rgb(255,255,255)" wx:else></view>
+            <view catchtap="colorSelect" class="box-button box-button-border" data-colormode="1" hoverClass="box-button-hover" style="background:rgb(255,255,0)" wx:if="{{Text.colorMode==1}}"></view>
+            <view catchtap="colorSelect" class="box-button" data-colormode="1" hoverClass="box-button-hover" style="background:rgb(255,255,0)" wx:else></view>
+            <view catchtap="colorSelect" class="box-button box-button-border" data-colormode="2" hoverClass="box-button-hover" style="background:rgb(255,0,255)" wx:if="{{Text.colorMode==2}}"></view>
+            <view catchtap="colorSelect" class="box-button" data-colormode="2" hoverClass="box-button-hover" style="background:rgb(255,0,255)" wx:else></view>
+            <view catchtap="colorSelect" class="box-button box-button-border" data-colormode="3" hoverClass="box-button-hover" style="background:rgb(0,255,255)" wx:if="{{Text.colorMode==3}}"></view>
+            <view catchtap="colorSelect" class="box-button" data-colormode="3" hoverClass="box-button-hover" style="background:rgb(0,255,255)" wx:else></view>
+            <view catchtap="colorSelect" class="box-button box-button-border" data-colormode="4" hoverClass="box-button-hover" style="background:rgb(0,255,0)" wx:if="{{Text.colorMode==4}}"></view>
+            <view catchtap="colorSelect" class="box-button" data-colormode="4" hoverClass="box-button-hover" style="background:rgb(0,255,0)" wx:else></view>
+            <view catchtap="colorSelect" class="box-button box-button-border" data-colormode="5" hoverClass="box-button-hover" style="background:rgb(255,0,0)" wx:if="{{Text.colorMode==5}}"></view>
+            <view catchtap="colorSelect" class="box-button" data-colormode="5" hoverClass="box-button-hover" style="background:rgb(255,0,0)" wx:else></view>
+            <view catchtap="colorSelect" class="box-button box-button-border" data-colormode="6" hoverClass="box-button-hover" style="background:rgb(0,0,255)" wx:if="{{Text.colorMode==6}}"></view>
+            <view catchtap="colorSelect" class="box-button" data-colormode="6" hoverClass="box-button-hover" style="background:rgb(0,0,255)" wx:else></view>
+        </scroll-view>
+    </view>
+    <view class="tools-box" style="overflow:hidden;white-space:nowrap;">
+        <text>大小</text>
+        <scroll-view scrollX style="width: {{W-90}}px;overflow:hidden;">
+            <view catchtap="fontSizeSelect" class="box-button box-button-border box-button-bg" data-fontsizemode="1" hoverClass="box-button-hover" wx:if="{{Text.fontSizeMode==1}}">小</view>
+            <view catchtap="fontSizeSelect" class="box-button box-button-border" data-fontsizemode="1" hoverClass="box-button-hover" wx:else>小</view>
+            <view catchtap="fontSizeSelect" class="box-button box-button-border box-button-bg" data-fontsizemode="2" hoverClass="box-button-hover" wx:if="{{Text.fontSizeMode==2}}">中</view>
+            <view catchtap="fontSizeSelect" class="box-button box-button-border" data-fontsizemode="2" hoverClass="box-button-hover" wx:else>中</view>
+            <view catchtap="fontSizeSelect" class="box-button box-button-border box-button-bg" data-fontsizemode="3" hoverClass="box-button-hover" wx:if="{{Text.fontSizeMode==3}}">大</view>
+            <view catchtap="fontSizeSelect" class="box-button box-button-border" data-fontsizemode="3" hoverClass="box-button-hover" wx:else>大</view>
+        </scroll-view>
+    </view>
+    <view class="tools-box" style="overflow:hidden;white-space:nowrap;">
+        <text>速度</text>
+        <scroll-view scrollX style="width: {{W-90}}px;overflow:hidden;">
+            <view catchtap="speedSelect" class="box-button box-button-border box-button-bg" data-speedmode="1" hoverClass="box-button-hover" wx:if="{{Text.speedMode==1}}">慢</view>
+            <view catchtap="speedSelect" class="box-button box-button-border" data-speedmode="1" hoverClass="box-button-hover" wx:else>慢</view>
+            <view catchtap="speedSelect" class="box-button box-button-border box-button-bg" data-speedmode="2" hoverClass="box-button-hover" wx:if="{{Text.speedMode==2}}">中</view>
+            <view catchtap="speedSelect" class="box-button box-button-border" data-speedmode="2" hoverClass="box-button-hover" wx:else>中</view>
+            <view catchtap="speedSelect" class="box-button box-button-border box-button-bg" data-speedmode="3" hoverClass="box-button-hover" wx:if="{{Text.speedMode==3}}">快</view>
+            <view catchtap="speedSelect" class="box-button box-button-border " data-speedmode="3" hoverClass="box-button-hover" wx:else>快</view>
+        </scroll-view>
+    </view>
+    <view class="tools-box" style="overflow:hidden;white-space:nowrap;">
+        <text>发光</text>
+        <scroll-view scrollX style="width: {{W-90}}px;overflow:hidden;">
+            <view catchtap="blinkColorSelect" class="box-button box-button-border" data-blinkcolormode="-1" hoverClass="box-button-hover" style="background:rgba(255,255,255,0.2)" wx:if="{{Text.blinkColorMode==-1}}"></view>
+            <view catchtap="blinkColorSelect" class="box-button" data-blinkcolormode="-1" hoverClass="box-button-hover" style="background:rgba(255,255,255,0.2)" wx:else></view>
+            <view catchtap="blinkColorSelect" class="box-button box-button-border" data-blinkcolormode="0" hoverClass="box-button-hover" style="background:rgb(255,255,255)" wx:if="{{Text.blinkColorMode==0}}"></view>
+            <view catchtap="blinkColorSelect" class="box-button" data-blinkcolormode="0" hoverClass="box-button-hover" style="background:rgb(255,255,255)" wx:else></view>
+            <view catchtap="blinkColorSelect" class="box-button box-button-border" data-blinkcolormode="1" hoverClass="box-button-hover" style="background:rgb(255,255,0)" wx:if="{{Text.blinkColorMode==1}}"></view>
+            <view catchtap="blinkColorSelect" class="box-button" data-blinkcolormode="1" hoverClass="box-button-hover" style="background:rgb(255,255,0)" wx:else></view>
+            <view catchtap="blinkColorSelect" class="box-button box-button-border" data-blinkcolormode="2" hoverClass="box-button-hover" style="background:rgb(255,0,255)" wx:if="{{Text.blinkColorMode==2}}"></view>
+            <view catchtap="blinkColorSelect" class="box-button" data-blinkcolormode="2" hoverClass="box-button-hover" style="background:rgb(255,0,255)" wx:else></view>
+            <view catchtap="blinkColorSelect" class="box-button box-button-border" data-blinkcolormode="3" hoverClass="box-button-hover" style="background:rgb(0,255,255)" wx:if="{{Text.blinkColorMode==3}}"></view>
+            <view catchtap="blinkColorSelect" class="box-button" data-blinkcolormode="3" hoverClass="box-button-hover" style="background:rgb(0,255,255)" wx:else></view>
+            <view catchtap="blinkColorSelect" class="box-button box-button-border" data-blinkcolormode="4" hoverClass="box-button-hover" style="background:rgb(0,255,0)" wx:if="{{Text.blinkColorMode==4}}"></view>
+            <view catchtap="blinkColorSelect" class="box-button" data-blinkcolormode="4" hoverClass="box-button-hover" style="background:rgb(0,255,0)" wx:else></view>
+            <view catchtap="blinkColorSelect" class="box-button box-button-border" data-blinkcolormode="5" hoverClass="box-button-hover" style="background:rgb(255,0,0)" wx:if="{{Text.blinkColorMode==5}}"></view>
+            <view catchtap="blinkColorSelect" class="box-button" data-blinkcolormode="5" hoverClass="box-button-hover" style="background:rgb(255,0,0)" wx:else></view>
+            <view catchtap="blinkColorSelect" class="box-button box-button-border" data-blinkcolormode="6" hoverClass="box-button-hover" style="background:rgb(0,0,255)" wx:if="{{Text.blinkColorMode==6}}"></view>
+            <view catchtap="blinkColorSelect" class="box-button" data-blinkcolormode="6" hoverClass="box-button-hover" style="background:rgb(0,0,255)" wx:else></view>
+        </scroll-view>
+    </view>
+</view>
+<view class="tools" style="width:{{W}}px;height:220px;" wx:if="{{mode==2&&show&&!showMode}}">
+    <view class="tools-box">
+        <text>文字</text>
+        <input bindinput="inputTextForStar" maxlength="20" style="width:{{W-120}}px;" value="{{Star.text}}"></input>
+    </view>
+    <view class="tools-box" style="overflow:hidden;white-space:nowrap;">
+        <text>颜色</text>
+        <scroll-view scrollX style="width: {{W-90}}px;overflow:hidden;">
+            <view catchtap="colorSelect" class="box-button box-button-border" data-colormode="1" hoverClass="box-button-hover" style="background:rgb(255,255,0)" wx:if="{{Star.colorMode==1}}"></view>
+            <view catchtap="colorSelect" class="box-button" data-colormode="1" hoverClass="box-button-hover" style="background:rgb(255,255,0)" wx:else></view>
+            <view catchtap="colorSelect" class="box-button box-button-border" data-colormode="2" hoverClass="box-button-hover" style="background:rgb(255,0,255)" wx:if="{{Star.colorMode==2}}"></view>
+            <view catchtap="colorSelect" class="box-button" data-colormode="2" hoverClass="box-button-hover" style="background:rgb(255,0,255)" wx:else></view>
+            <view catchtap="colorSelect" class="box-button box-button-border" data-colormode="3" hoverClass="box-button-hover" style="background:rgb(0,255,255)" wx:if="{{Star.colorMode==3}}"></view>
+            <view catchtap="colorSelect" class="box-button" data-colormode="3" hoverClass="box-button-hover" style="background:rgb(0,255,255)" wx:else></view>
+            <view catchtap="colorSelect" class="box-button box-button-border" data-colormode="4" hoverClass="box-button-hover" style="background:rgb(0,255,0)" wx:if="{{Star.colorMode==4}}"></view>
+            <view catchtap="colorSelect" class="box-button" data-colormode="4" hoverClass="box-button-hover" style="background:rgb(0,255,0)" wx:else></view>
+            <view catchtap="colorSelect" class="box-button box-button-border" data-colormode="5" hoverClass="box-button-hover" style="background:rgb(255,0,0)" wx:if="{{Star.colorMode==5}}"></view>
+            <view catchtap="colorSelect" class="box-button" data-colormode="5" hoverClass="box-button-hover" style="background:rgb(255,0,0)" wx:else></view>
+            <view catchtap="colorSelect" class="box-button box-button-border" data-colormode="6" hoverClass="box-button-hover" style="background:rgb(0,0,255)" wx:if="{{Star.colorMode==6}}"></view>
+            <view catchtap="colorSelect" class="box-button" data-colormode="6" hoverClass="box-button-hover" style="background:rgb(0,0,255)" wx:else></view>
+        </scroll-view>
+    </view>
+    <view class="tools-box" style="overflow:hidden;white-space:nowrap;">
+        <text>速度</text>
+        <scroll-view scrollX style="width: {{W-90}}px;overflow:hidden;">
+            <view catchtap="speedSelect" class="box-button box-button-border box-button-bg" data-speedmode="1" hoverClass="box-button-hover" wx:if="{{Star.speedMode==1}}">慢</view>
+            <view catchtap="speedSelect" class="box-button box-button-border" data-speedmode="1" hoverClass="box-button-hover" wx:else>慢</view>
+            <view catchtap="speedSelect" class="box-button box-button-border box-button-bg" data-speedmode="2" hoverClass="box-button-hover" wx:if="{{Star.speedMode==2}}">中</view>
+            <view catchtap="speedSelect" class="box-button box-button-border" data-speedmode="2" hoverClass="box-button-hover" wx:else>中</view>
+            <view catchtap="speedSelect" class="box-button box-button-border box-button-bg" data-speedmode="3" hoverClass="box-button-hover" wx:if="{{Star.speedMode==3}}">快</view>
+            <view catchtap="speedSelect" class="box-button box-button-border " data-speedmode="3" hoverClass="box-button-hover" wx:else>快</view>
+        </scroll-view>
+    </view>
+    <view class="tools-box" style="overflow:hidden;white-space:nowrap;">
+        <text>发光</text>
+        <scroll-view scrollX style="width: {{W-90}}px;overflow:hidden;">
+            <view catchtap="blinkColorSelect" class="box-button box-button-border" data-blinkcolormode="1" hoverClass="box-button-hover" style="background:rgb(255,255,0)" wx:if="{{Star.blinkColorMode==1}}"></view>
+            <view catchtap="blinkColorSelect" class="box-button" data-blinkcolormode="1" hoverClass="box-button-hover" style="background:rgb(255,255,0)" wx:else></view>
+            <view catchtap="blinkColorSelect" class="box-button box-button-border" data-blinkcolormode="2" hoverClass="box-button-hover" style="background:rgb(255,0,255)" wx:if="{{Star.blinkColorMode==2}}"></view>
+            <view catchtap="blinkColorSelect" class="box-button" data-blinkcolormode="2" hoverClass="box-button-hover" style="background:rgb(255,0,255)" wx:else></view>
+            <view catchtap="blinkColorSelect" class="box-button box-button-border" data-blinkcolormode="3" hoverClass="box-button-hover" style="background:rgb(0,255,255)" wx:if="{{Star.blinkColorMode==3}}"></view>
+            <view catchtap="blinkColorSelect" class="box-button" data-blinkcolormode="3" hoverClass="box-button-hover" style="background:rgb(0,255,255)" wx:else></view>
+            <view catchtap="blinkColorSelect" class="box-button box-button-border" data-blinkcolormode="4" hoverClass="box-button-hover" style="background:rgb(0,255,0)" wx:if="{{Star.blinkColorMode==4}}"></view>
+            <view catchtap="blinkColorSelect" class="box-button" data-blinkcolormode="4" hoverClass="box-button-hover" style="background:rgb(0,255,0)" wx:else></view>
+            <view catchtap="blinkColorSelect" class="box-button box-button-border" data-blinkcolormode="5" hoverClass="box-button-hover" style="background:rgb(255,0,0)" wx:if="{{Star.blinkColorMode==5}}"></view>
+            <view catchtap="blinkColorSelect" class="box-button" data-blinkcolormode="5" hoverClass="box-button-hover" style="background:rgb(255,0,0)" wx:else></view>
+            <view catchtap="blinkColorSelect" class="box-button box-button-border" data-blinkcolormode="6" hoverClass="box-button-hover" style="background:rgb(0,0,255)" wx:if="{{Star.blinkColorMode==6}}"></view>
+            <view catchtap="blinkColorSelect" class="box-button" data-blinkcolormode="6" hoverClass="box-button-hover" style="background:rgb(0,0,255)" wx:else></view>
+        </scroll-view>
+    </view>
+</view>
+<view class="tools" style="width:{{W}}px;height:200px;" wx:if="{{mode==3&&show&&!showMode}}"></view>
